@@ -6,7 +6,7 @@ angular
     return {
       restrict: 'E',
       scope: {
-	selection: '='
+        selection: '='
       },
       templateUrl: 'template/arxiv-selector.html',
       link: function ($scope) {
@@ -14,72 +14,72 @@ angular
 	if ($scope.selection) {
 	  reconstructSelection($scope.selection, $scope.database);
 	} else {
-	  $scope.selection = buildQuery($scope.database);
-	}
-	$scope.selectTopic = function (topic,area) {
-	  if (area.selected) {
-	    clearChildren(area, true);
-	    topic.selected = false;
-	    area.selected = false;
-	  } else if (topic.selected) {
-	    topic.selected = false;
-	  } else {
-	    topic.selected = true;
-	  }
-	  $scope.selection = buildQuery($scope.database);
-	};
-	$scope.selectArea = function (area) {
-	  if (area.subareas) {
-	    clearChildren(area, false);
-	  }
-	  area.selected = !area.selected;
-	  $scope.selection = buildQuery($scope.database);
-	};
-	$scope.toggleField = function (field) {
-	  field.open = !field.open;
-	};
-	$scope.someSelected = function (field) {
-	  function innerArray(array) {
-	    for (var i = 0; i < array.length; ++i) {
-	      if (inner(array[i]))
-		return true;
-	    }
-	  }
-	  function inner(area) {
-	    return area.selected || (area.subareas && innerArray(area.subareas));
-	  }
-	  return innerArray(field.areas);
-	};
+          $scope.selection = buildQuery($scope.database);
+        }
+        $scope.selectTopic = function (topic,area) {
+          if (area.selected) {
+            clearChildren(area, true);
+            topic.selected = false;
+            area.selected = false;
+          } else if (topic.selected) {
+            topic.selected = false;
+          } else {
+            topic.selected = true;
+          }
+          $scope.selection = buildQuery($scope.database);
+        };
+        $scope.selectArea = function (area) {
+          if (area.subareas) {
+            clearChildren(area, false);
+          }
+          area.selected = !area.selected;
+          $scope.selection = buildQuery($scope.database);
+        };
+        $scope.toggleField = function (field) {
+          field.open = !field.open;
+        };
+        $scope.someSelected = function (field) {
+          function innerArray(array) {
+            for (var i = 0; i < array.length; ++i) {
+              if (inner(array[i]))
+                return true;
+            }
+          }
+          function inner(area) {
+            return area.selected || (area.subareas && innerArray(area.subareas));
+          }
+          return innerArray(field.areas);
+        };
       }
     };
 
     function reconstructSelection(query,database) {
       function innerArray(query, array) {
-	var L = array.length;
-	for (var i = 0; i < L; ++i)
-	  inner(query, array[i]);
+        var L = array.length;
+        for (var i = 0; i < L; ++i)
+          inner(query, array[i]);
       }
 
       function inner(query, area) {
-	area.selected = query.indexOf(area.code) >= 0;
-	if (area.subareas) {
-	  innerArray(query, area.subareas);
-	}
+        area.selected = query.indexOf(area.code) >= 0;
+        if (area.subareas) {
+          innerArray(query, area.subareas);
+        }
       }
 
       var L = database.length;
       for (var i = 0; i < L; ++i)
-	innerArray(query, database[i].areas);
+        innerArray(query, database[i].areas);
     }
 
     function areaQuery(query,area) {
       if (area.selected) {
-	return (query ? (query + '+OR+cat:') : 'cat:') + area.code;
+        return (query ? (query + '+OR+cat:') : 'cat:') + area.code;
       } else if (area.subareas) {
-	var L = area.subareas.length;
-	for (var i = 0; i < L; ++i) {
-	  query = areaQuery(query, area.subareas[i]);
-	}
+        var L = area.subareas.length;
+        for (var i = 0; i < L; ++i) {
+          query = areaQuery(query, area.subareas[i]);
+        }
       }
       return query;
     }
@@ -88,11 +88,11 @@ angular
       var L = database.length;
       var query = null;
       for (var i = 0; i < L; ++i) {
-	var areas = database[i].areas;
-	var M = areas.length;
-	for (var j = 0; j < M; ++j) {
-	  query = areaQuery(query, areas[j]);
-	}
+        var areas = database[i].areas;
+        var M = areas.length;
+        for (var j = 0; j < M; ++j) {
+          query = areaQuery(query, areas[j]);
+        }
       }
       return query;
     }
@@ -100,7 +100,7 @@ angular
     function clearChildren(area, value) {
       var L = area.subareas.length;
       for (var i = 0; i < L; ++i)
-	area.subareas[i].selected = value;
+        area.subareas[i].selected = value;
     }
 
     function makeArxivDatabase() {
@@ -445,7 +445,7 @@ angular
 		  name: 'Human-Computer Interaction' },
 		{ code: 'cs.IR',
 		  selected: false,
-		  name: 'Information Retrieval' },,
+		  name: 'Information Retrieval' },
 		{ code: 'cs.IT',
 		  selected: false,
 		  name: 'Information Theory' },

@@ -60,16 +60,22 @@ angular
     return {
       restrict: 'E',
       scope: {
-	link: '@'
+        text: '@',
+        link: '@'
       },
-      template: '<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.dailyarxiv.com&hashtags=dailyarxiv&url={{link}}"><img src="media/twitter.png" alt="tweet"/></a>&nbsp;<a href="http://www.facebook.com/sharer.php?u={{link}}" target="_blank"><img src="media/facebook.png" alt="Share on Facebook"/></a>'
+      template: '<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.dailyarxiv.com&hashtags=dailyarxiv&text={{shape(text)}}&url={{link}}"><img src="media/twitter.png" alt="tweet"/></a>&nbsp;<a href="http://www.facebook.com/sharer.php?u={{link}}" target="_blank"><img src="media/facebook.png" alt="Share on Facebook"/></a>',
+      link: function ($scope) {
+	$scope.shape = function (text) {
+	  return encodeURIComponent(text);
+	}
+      }
     };
   })
   .directive('arxivList', function() {
     return {
       restrict: 'E',
       scope: {
-	articles: '=',
+        articles: '=',
 	saveTo: '=',
       },
       templateUrl: 'template/arxiv-list.html',
@@ -84,7 +90,7 @@ angular
 	    } else {
 	      $scope.saveTo.remove(article);
 	    }
-	  }	  
+	  }
 	}
       }
     };

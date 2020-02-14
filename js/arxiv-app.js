@@ -60,7 +60,7 @@ function makeReadingList($cookies) {
     var output = [];
     for (var v in list)
       if (list.hasOwnProperty(v)) {
-	output.push(v);
+        output.push(v);
       }
     return output;
   }
@@ -68,7 +68,7 @@ function makeReadingList($cookies) {
     var output = [];
     for (var v in list)
       if (list.hasOwnProperty(v)) {
-	output.push(list[v]);
+        output.push(list[v]);
       }
     return output;
   }
@@ -85,12 +85,12 @@ angular
 
     $scope.loadList = function (query, date) {
       if (query) {
-	$cookies.put('arxivLastSelection',query);
-	var last_date = $cookies.getObject('arxivLastDate');
-	if (last_date && last_date < date) {
-	  $cookies.putObject('arxiLastDate',date);
-	}
-	$state.go('list', { query: query, date: date});
+        $cookies.put('arxivLastSelection',query);
+        var last_date = $cookies.getObject('arxivLastDate');
+        if (last_date && last_date < date) {
+          $cookies.putObject('arxiLastDate',date);
+        }
+        $state.go('list', { query: query, date: date});
       }
     }
     $scope.loadReadingList = function () {
@@ -148,40 +148,40 @@ angular
     if ($scope.ids) {
       $scope.url = idListToUrl($scope.ids);
       $http({
-	method: "GET",
-	url: $scope.url
+        method: "GET",
+        url: $scope.url
       }).then(function mySuccess(response) {
-	$scope.xml = response.data;
-	$scope.articles = xmlToJSON(response.data, $scope.readingList);
-	$scope.mailto = composeMail($scope.articles);
-	$scope.errMsg = '';
+        $scope.xml = response.data;
+        $scope.articles = xmlToJSON(response.data, $scope.readingList);
+        $scope.mailto = composeMail($scope.articles);
+        $scope.errMsg = '';
       }, function myError(response) {
-	$scope.xml = null;
-	$scope.errMsg = response.statusText;
+        $scope.xml = null;
+        $scope.errMsg = response.statusText;
       });
     }
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('default', {
-	url: '',
-	templateUrl: 'template/arxiv-page-main.html',
-	controller: 'mainCtrl'
+        url: '',
+        templateUrl: 'template/arxiv-page-main.html',
+        controller: 'mainCtrl'
       })
       .state('list', {
-	url: '/list?query&date',
-	templateUrl: 'template/arxiv-page-list.html',
-	controller: 'listCtrl'
+        url: '/list?query&date',
+        templateUrl: 'template/arxiv-page-list.html',
+        controller: 'listCtrl'
       })
       .state('saved', {
-	url: '/saved',
-	templateUrl: 'template/arxiv-page-saved.html',
-	controller: 'savedListCtrl'
+        url: '/saved',
+        templateUrl: 'template/arxiv-page-saved.html',
+        controller: 'savedListCtrl'
       })
       .state('id_list', {
-	url: '/id_list?ids',
-	templateUrl: 'template/arxiv-page-saved.html',
-	controller: 'savedIdListCtrl'
+        url: '/id_list?ids',
+        templateUrl: 'template/arxiv-page-saved.html',
+        controller: 'savedIdListCtrl'
       });
   })
   .directive('arxivFooter', function () {
