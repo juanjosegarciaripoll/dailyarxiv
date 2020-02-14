@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html ng-app="arxivApp">
+<head>
+<title>Daily arXiv</title>
+  <meta name="author" content="Juan Jos&eacute; Garc&iacute; Ripoll">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="copyright" content"&copy; 2011 Juan Jos&eacute; Garc&iacute; Ripoll, public domain">
+  <meta name="keywords" content="science, articles, preprints, physics, mathematics, computer science, arxiv">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <link rel="icon" href="media/favicon.png">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+  <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/arxiv-common.css" />
+  <link rel="stylesheet" type="text/css" href="css/arxiv.css" />
+  <script src="js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="js/arxiv-date.js" type="text/javascript"></script>
+  <script src="js/arxiv-cookies.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <div class='header'>
+    <div id='left' class='left lr_button'>&#x0ab;</div>
+    <div id='right' class='right lr_button'>&#x0bb;</div>
+    <h1><a href="arxiv.html">daily arXiv :: list</br><div id='date'></div></a></h1>
+  </div>
+
+
+  <div id='url'></div>
+
+  <div id='msg'></div>
+
+  <div id='info'></div>
+
+  <div>
+    <div ng-controller="listCtrl">
+      <div id='rolling'
+           ng-show='articles.length == 0'
+           style="width: 100%; height: 200px; vertical-align: middle; text-align: center">
+        <img style="padding-top: 80px" src="media/roll.gif"/>
+      </div>
+      <div class='arxiv_entry'
+           ng-repeat='article in articles'
+           ng-class='{ "gray" : (article.code % 2)===0 }'
+           ng-click='toggle(article)'>
+        <div class='arxiv_pdf'>
+          <a href='{{article.pdf_link}}' target='_blank'>
+          <img src='media/arxiv36x36.png'/></a>
+        </div>
+        <div class='arxiv_title' id='arxiv_link' ng-hide='article.open'>
+          {{article.title}}
+        </div>
+        <div class='arxiv_title' id='arxiv_link' ng-show='article.open'>
+          <a href='{{article.link}}'>{{article.title}}</a>
+        </div>
+        <div class='arxiv_authors'>{{article.authors}}</div>
+        <div class='arxiv_desc' ng-if='article.open'>
+          {{article.abs}} [{{article.link}}]<br/>
+          <arxiv-share link="article.link"></arxiv-share>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <hr>
+  <address></address>
+  <script src="js/arxiv2.js" type="text/javascript"></script>
+</body>
+</html>

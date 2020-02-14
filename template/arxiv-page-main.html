@@ -1,0 +1,39 @@
+<div class='arxiv-header'>
+  <div class='container'>
+    <div class='col-xs-2'><span class="glyphicon glyphicon-inbox" ng-if="readingList.toRead()" ng-click="loadReadingList()"></span></div>
+    <div class='col-xs-8'>
+      daily arXiv<br/>
+      <div id="date">select topics and dates</div>
+    </div>
+    <div class='col-xs-2' ng-class='{"transparent": !query, "clickable": true}'  ng-click='loadList(query, date)'>&#x0bb;</div>
+  </div>
+</div>
+
+<div class='container boding'>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <arxiv-calendar selection="date"></arxiv-calendar>
+      <!--
+	  <h2>Save search</h2>
+	  -->
+      <div ng-hide='query' style="color: red;">
+	Please select one or more areas to read
+      </div>
+      <!--
+      <div class='arxiv-menu'>
+	<arxiv-share link="http://dailyarxiv.com"></arxiv-share>
+      </div>
+      -->
+    </div>
+
+    <div class='col-sm-6'>
+      <arxiv-selector selection="query"></arxiv-selector>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+      <arxiv-footer></arxiv-footer>
+    </div>
+  </div>
+</div>

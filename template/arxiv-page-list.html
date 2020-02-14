@@ -1,0 +1,25 @@
+<div class='arxiv-header'>
+  <div class='container'>
+    <div class='col-xs-2 clickable' ng-click='prevPage()'>&#x0ab;</div>
+    <div class='col-xs-8'>
+      <a ui-sref="default">daily arXiv</br>
+	<div id='date'>{{date|date}}</div></a>
+    </div>
+    <div class='col-xs-2 clickable' ng-click='nextPage()'>&#x0bb;</div>
+  </div>
+</div>
+
+<div class='container boding'>
+  <div class='col-xs-12'
+       id='rolling'
+       ng-hide='xml'
+       style="width: 100%; height: 200px; vertical-align: middle; text-align: center">
+    <img style="padding-top: 80px" src="media/roll.gif"/>
+  </div>
+</div>
+<arxiv-list articles='articles' save-to='readingList'></arxiv-list>
+<div class='container'>
+  <div class='col-xs-12'>
+    <arxiv-footer></arxiv-footer>
+  </div>
+</div>

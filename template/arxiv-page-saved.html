@@ -1,0 +1,21 @@
+<div class='arxiv-header'>
+  <div class='col-md-12'>
+    <div class='col-xs-2'><span class='glyphicon glyphicon-trash' ng-click='clearAndExit()'></span></div>
+    <div class='col-xs-8'>
+      <a ui-sref="default">daily arXiv</br>
+	<div id='date'>reading list</div></a>
+    </div>
+    <div class='col-xs-2'>
+      <a ng-href='{{mailto}}'><span class='glyphicon glyphicon-envelope'></span></a></div>
+  </div>
+</div>
+
+
+<div class='boding'>
+  <arxiv-list articles='articles' save-to='readingList'></arxiv-list>
+  <div class='container'>
+    <div class='col-xs-12'>
+      <arxiv-footer></arxiv-footer>
+    </div>
+  </div>
+</div>

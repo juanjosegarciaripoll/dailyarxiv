@@ -1,0 +1,39 @@
+<h2 class='section'>Dates
+<div class='arxiv_pdf clickable' ng-click='gotoDate(null)'>[Today]</div></h2>
+<table class='cal_month'>
+  <colgroup>
+    <col width="14%">
+    <col width="14%">
+    <col width="14%">
+    <col width="14%">
+    <col width="14%">
+    <col width="14%">
+    <col width="14%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th ng-click='previousMonth()' class='clickable'>&#xab;</th>
+      <th colspan=5>{{monthName()}}, {{year()}}</th>
+      <th ng-click='nextMonth()' class='clickable'>&#xbb;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class='cal_week'>
+      <td class='cal_day'>Sun</td>
+      <td class='cal_day'>Mon</td>
+      <td class='cal_day'>Tue</td>
+      <td class='cal_day'>Wed</td>
+      <td class='cal_day'>Thu</td>
+      <td class='cal_day'>Fri</td>
+      <td class='cal_day'>Sat</td>
+    </tr>
+    <tr class='cal_week' ng-repeat='week in weeks'>
+      <td class='cal_day' ng-repeat='day in week'>
+	<div ng-show='day.date' ng-click='select(day)'
+	     ng-class='{"cal_selected":day.selected, "clickable": !day.holiday, "cal_holiday": day.holiday}'>
+	  {{day.day}}
+	</div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,15 @@
+<div ng-repeat="field in database" class='arxiv_area clickable'>
+  <h2 class='section' ng-click='toggleField(field)'>{{field.name}}
+    <div class='arxiv_pdf' ng-if='someSelected(field)'>&#10003;</div></h2>
+  <div class='main-category' ng-show='field.open' ng-repeat="area in field.areas">
+    <div class='name' ng-class="{'arxiv_sel': area.selected}"
+	 ng-click="selectArea(area)">
+      {{area.name}}
+      </div>
+    <div ng-if="area.subareas" ng-repeat="topic in area.subareas" class='subcategory'
+	 ng-class="{'arxiv_sel': area.selected || topic.selected}"
+	 ng-click="selectTopic(topic,area)">
+      {{topic.name}}
+    </div>
+  </div>
+</div>
